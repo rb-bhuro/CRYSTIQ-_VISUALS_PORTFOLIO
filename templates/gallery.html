@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery – Crystiq Visuals</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #0b0b0d;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ---------------- NAVBAR ---------------- */
+        .navbar-custom {
+            background: #0d0d0f;
+            padding: 12px 40px;
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar-custom .nav-link {
+            color: #fff;
+            margin-right: 18px;
+            font-weight: 500;
+        }
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: #ff9800 !important;
+        }
+        .navbar-brand img {
+            height: 42px;
+        }
+
+        /* ---------------- TOGGLE BUTTONS ---------------- */
+        .toggle-btn {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #fff;
+            margin-right: 10px;
+            transition: 0.3s;
+        }
+        .toggle-btn.active {
+            background: #ff9800;
+            color: #000;
+        }
+
+        /* ---------------- GRID MODE ---------------- */
+        .grid-item {
+            border-radius: 12px;
+            background: #111;
+            padding: 10px;
+            transition: 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+        .grid-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .grid-title {
+            margin-top: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #ffcc80;
+        }
+
+        /* ---------------- LIST MODE ---------------- */
+        .list-item {
+            display: flex;
+            background: #111;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .list-item img {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 15px;
+        }
+        .list-content h5 {
+            margin: 0;
+            color: #ffcc80;
+        }
+
+        /* Preview Modal */
+        .modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ---------------- NAVBAR ---------------- -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="/">
+        <img src="/static/images/logo.png" alt="Logo">
+    </a>
+
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li><a class="nav-link" href="/">Home</a></li>
+            <li><a class="nav-link active" href="/gallery">Gallery</a></li>
+            <li><a class="nav-link" href="/about">About</a></li>
+            <li><a class="nav-link" href="/contact">Contact</a></li>
+            <li><a class="nav-link" href="/admin">Admin</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container my-5">
+
+    <h1 class="text-center mb-4" style="color:#ffb74d; font-weight:700;">Gallery</h1>
+
+    <!-- Search + Toggle Section -->
+    <div class="d-flex justify-content-between mb-4">
+        <input type="text" id="searchBox" class="form-control w-50" placeholder="Search design...">
+
+        <div>
+            <button id="gridBtn" class="toggle-btn active">Grid View</button>
+            <button id="listBtn" class="toggle-btn">List View</button>
+        </div>
+    </div>
+
+    <!-- GRID VIEW -->
+    <div id="gridView" class="row g-3">
+        {% for d in designs %}
+        <div class="col-md-4 col-6 grid-item design-box" data-title="{{ d.title }}">
+            <img src="{{ d.image_url }}" onclick="openPreview('{{ d.image_url }}', '{{ d.title }}')">
+            <p class="grid-title">{{ d.title }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- LIST VIEW -->
+    <div id="listView" class="d-none">
+        {% for d in designs %}
+        <div class="list-item design-box" data-title="{{ d.title }}" onclick="openPreview('{{ d.image_url }}', '{{ d.title }}')">
+            <img src="{{ d.image_url }}" alt="">
+            <div class="list-content">
+                <h5>{{ d.title }}</h5>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content" style="background:#0d0d0f; border:1px solid #333;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="previewTitle"></h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="previewImg" class="modal-img">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const gridBtn = document.getElementById("gridBtn");
+    const listBtn = document.getElementById("listBtn");
+    const gridView = document.getElementById("gridView");
+    const listView = document.getElementById("listView");
+    const searchBox = document.getElementById("searchBox");
+
+    gridBtn.onclick = () => {
+        gridView.classList.remove("d-none");
+        listView.classList.add("d-none");
+        gridBtn.classList.add("active");
+        listBtn.classList.remove("active");
+    };
+
+    listBtn.onclick = () => {
+        listView.classList.remove("d-none");
+        gridView.classList.add("d-none");
+        listBtn.classList.add("active");
+        gridBtn.classList.remove("active");
+    };
+
+    searchBox.addEventListener("input", function() {
+        let value = this.value.toLowerCase();
+        document.querySelectorAll(".design-box").forEach(box => {
+            let txt = box.dataset.title.toLowerCase();
+            box.style.display = txt.includes(value) ? "" : "none";
+        });
+    });
+
+    function openPreview(img, title) {
+        document.getElementById("previewImg").src = img;
+        document.getElementById("previewTitle").innerText = title;
+        var modal = new bootstrap.Modal(document.getElementById("previewModal"));
+        modal.show();
+    }
+</script>
+
+</body>
+</html>

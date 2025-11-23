@@ -1,0 +1,237 @@
+/* ===== Global Theme ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #0d0d0d;
+    color: #e8e8e8;
+}
+
+a {
+    color: #00ffc6;
+    text-decoration: none;
+}
+a:hover {
+    opacity: .8;
+}
+
+/* ===== Navbar ===== */
+.custom-navbar {
+    background: #111 !important;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+.navbar .nav-link {
+    color: #eaeaea !important;
+    font-weight: 500;
+}
+.navbar .nav-link:hover {
+    color: #00ffc6 !important;
+}
+
+/* ===== Container Section ===== */
+.section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #00ffc6;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ===== Cards ===== */
+.card {
+    background: #161616;
+    border: 1px solid #242424;
+    color: #e8e8e8;
+}
+.card-title {
+    color: #00ffc6;
+}
+
+/* ===== ADMIN PANEL ===== */
+.admin-box {
+    background: #151515;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #222;
+}
+
+/* Input fields visible */
+input,
+textarea,
+select {
+    background: #1b1b1b !important;
+    color: #ffffff !important;
+    border: 1px solid #333 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #bfbfbf !important;
+}
+
+/* Input focus highlight */
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #00ffc6 !important;
+    box-shadow: 0 0 5px #00ffc6 !important;
+}
+
+/* Buttons */
+.btn-custom {
+    background: #00ffc6;
+    color: #000;
+    font-weight: 600;
+    border: none;
+}
+.btn-custom:hover {
+    background: #00cfa0;
+    color: #000;
+}
+
+/* Delete Button */
+.btn-danger {
+    background: #ff4b4b !important;
+    border: none;
+}
+
+/* ===== Gallery grid ===== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #101010;
+    border: 1px solid #222;
+}
+.gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: .3s ease;
+}
+.gallery-item:hover img {
+    transform: scale(1.06);
+}
+
+/* Featured Tag */
+.featured-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #00ffc6;
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: #000;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* ===== List Mode ===== */
+.gallery-list-item {
+    display: flex;
+    gap: 15px;
+    background: #161616;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #242424;
+}
+.gallery-list-item img {
+    width: 140px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ===== Search Bar ===== */
+.search-box input {
+    background: #1b1b1b;
+    border: 1px solid #292929;
+    color: #fff;
+}
+
+/* ===== Contact Page ===== */
+.contact-container {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.social-link {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+    color: white;
+    border-radius: 50%;
+    font-size: 30px;
+    transition: .3s;
+}
+
+.instagram:hover { color: #ff4ec4; transform: scale(1.1); }
+.discord:hover { color: #7289da; transform: scale(1.1); }
+.whatsapp:hover { color: #25d366; transform: scale(1.1); }
+.phone:hover { color: #ffae00; transform: scale(1.1); }
+
+/* ===== Footer ===== */
+footer {
+    background: #111 !important;
+    border-top: 1px solid #1f1f1f;
+    color: #bbb;
+}
+/* FIX — Gallery Title Visible in Grid Mode */
+.gallery-title {
+    color: #ffffff !important;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px 5px 5px;
+    background: rgba(0, 0, 0, 0.65);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #111;       /* FIX: keeps navbar visible */
+    border-bottom: 1px solid #333;
+}
+
+.nav-links li a {
+    color: #fff;            /* FIX: visible on dark background */
+}
+
+.nav-links li a.active {
+    color: #ff9800;         /* highlight current section */
+}
+.gallery-section {
+    position: relative;
+    z-index: 1;
+}
+
+

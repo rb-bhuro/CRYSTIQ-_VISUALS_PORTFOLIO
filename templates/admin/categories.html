@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Manage Categories{% endblock %}
+{% block content %}
+<h3>Categories</h3>
+<form method="post" class="row g-2 mb-3">
+  <div class="col-auto"><input name="name" class="form-control" placeholder="New category name"></div>
+  <div class="col-auto"><button class="btn btn-primary">Add</button></div>
+</form>
+
+<table class="table">
+  <thead><tr><th>Name</th><th>Action</th></tr></thead>
+  <tbody>
+    {% for c in categories %}
+      <tr>
+        <td>
+          <form method="post" action="{{ url_for('admin_category_edit', cat_id=c['id']) }}" class="d-flex gap-2">
+            <input name="name" value="{{ c['name'] }}" class="form-control form-control-sm">
+            <button class="btn btn-sm btn-success">Save</button>
+          </form>
+        </td>
+        <td>
+          <form method="post" action="{{ url_for('admin_category_delete', cat_id=c['id']) }}" onsubmit="return confirm('Delete category?');">
+            <button class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

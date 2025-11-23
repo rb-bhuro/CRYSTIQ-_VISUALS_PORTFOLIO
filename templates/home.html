@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="hero py-5 text-center text-white" style="position:relative;">
+  <!-- replace with your video background -->
+  <video autoplay muted loop playsinline class="w-100" style="object-fit:cover; height:320px; border-radius:12px;">
+    <source src="{{ url_for('static', filename='images/gfx-bg.mp4') }}" type="video/mp4">
+  </video>
+  <div class="hero-overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+    <div>
+      <h1 class="display-5">Crystiq Visuals</h1>
+      <p class="lead">Crafting bold visuals for brands & creators</p>
+      <a class="btn btn-outline-light btn-lg" href="{{ url_for('gallery') }}">Explore Gallery</a>
+    </div>
+  </div>
+</div>
+
+<div class="mt-4">
+  <h3>Featured</h3>
+  <div class="row g-3">
+    {% for d in featured %}
+      <div class="col-6 col-md-4">
+        <div class="card">
+          <img src="{{ d['image_url'] }}" class="card-img-top preview-thumb" data-id="{{ d['id'] }}" alt="{{ d['title'] }}">
+          <div class="card-body p-2">
+            <div class="d-flex justify-content-between align-items-center">
+              <strong class="small">{{ d['title'] }}</strong>
+              <span class="badge bg-warning text-dark">Featured</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="col-12">No featured designs yet.</div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="mt-4">
+  <h3>Newest</h3>
+  <div class="row g-3">
+    {% for d in newest %}
+      <div class="col-6 col-md-3">
+        <img src="{{ d['image_url'] }}" class="img-fluid preview-thumb" data-id="{{ d['id'] }}" alt="{{ d['title'] }}">
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

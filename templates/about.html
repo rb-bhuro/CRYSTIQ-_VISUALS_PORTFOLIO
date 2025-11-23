@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us – Crystiq Visuals</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* BACKGROUND */
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top, #1a1a1a, #000);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* PAGE CARD */
+        .main-box {
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        /* TITLE */
+        .title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(90deg,#00eaff,#ff4dff,#00ffc6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* SUBTITLE */
+        .sub-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-top: 35px;
+            background: linear-gradient(90deg,#ffcf33,#ff7a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* TEAM CARD */
+        .team-card {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            background: linear-gradient(120deg,#111,#1a1a1a,#111);
+            border: 1px solid rgba(255,255,255,0.09);
+            box-shadow: 0 0 20px rgba(0,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0,255,255,0.2);
+        }
+
+        .team-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #00eaff;
+            margin-bottom: 6px;
+        }
+        .team-desc {
+            color: #bbb;
+            font-size: 0.95rem;
+        }
+
+        /* LIST ITEMS */
+        ul li {
+            margin: 8px 0;
+            font-size: 1.1rem;
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 20px 0;
+            text-align: center;
+            color: #888;
+            margin-top: 40px;
+        }
+
+        /* ANIMATION */
+        @keyframes glowFade {
+            0% { box-shadow: 0 0 0px rgba(0,255,255,0.2); }
+            50% { box-shadow: 0 0 20px rgba(0,255,255,0.4); }
+            100% { box-shadow: 0 0 0px rgba(0,255,255,0.2); }
+        }
+
+        .glow-animate {
+            animation: glowFade 3s infinite;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container my-5">
+    <div class="main-box glow-animate">
+
+        <h1 class="title">About Us</h1>
+
+        <p class="text-center mt-3" style="font-size: 1.1rem; color:#ddd;">
+            Crystiq Visuals is a premium GFX studio delivering high-quality esports graphics,
+            logos, posters, banners and creative artwork for gamers worldwide.
+        </p>
+
+        <h2 class="sub-title">Our Mission</h2>
+        <p style="color:#ccc;">
+            To redefine creative visuals in the gaming world by providing sharp, modern,
+            and impactful graphics that boost the identity of gaming brands & esports teams.
+        </p>
+
+        <h2 class="sub-title">Meet the Team</h2>
+
+        <!-- Developer -->
+        <div class="team-card">
+            <div class="team-title">👨‍💻 Developer — <strong>RANGANI OM AKA BHURO</strong></div>
+            <div class="team-desc">Builds website backend, admin dashboard, database, and manages updates.</div>
+        </div>
+
+        <!-- Designer 1 -->
+        <div class="team-card">
+            <div class="team-title">🎨 Designer — <strong>UDIT NARAYAN AKA GOOFY</strong></div>
+            <div class="team-desc">Specializes in posters, banners, esports editing and high-end graphics.</div>
+        </div>
+
+        <!-- Designer 2 -->
+        <div class="team-card">
+            <div class="team-title">🎨 Designer — <strong>SWASTIK AKA FLUXO </strong></div>
+            <div class="team-desc">Expert in logos, thumbnails, social media branding & visual identity.</div>
+        </div>
+
+        <h2 class="sub-title">What We Create</h2>
+
+        <ul>
+            <li>🔥 Esports Logos & Mascots</li>
+            <li>🔥 Custom Banners & Posters</li>
+            <li>🔥 Professional Thumbnails</li>
+            <li>🔥 GFX Packs & Overlays</li>
+            <li>🔥 Social Media Branding</li>
+            <li>🔥 Event & Scrim Graphics</li>
+        </ul>
+
+        <p class="text-center mt-3" style="color:#ddd;">
+            Thank you for choosing Crystiq Visuals ❤️  
+            We appreciate your support!
+        </p>
+    </div>
+
+    <div class="footer">
+        &copy; {{ year }} Crystiq Visuals. All Rights Reserved.
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Manage Designs{% endblock %}
+{% block content %}
+<h3>Designs</h3>
+
+<!-- add new -->
+<div class="card p-3 mb-4">
+  <form method="post" action="{{ url_for('admin_design_add') }}">
+    <div class="row g-2">
+      <div class="col-md-4"><input name="title" placeholder="Title" class="form-control" required></div>
+      <div class="col-md-5"><input name="image_url" placeholder="Image URL (or embed URL)" class="form-control" required></div>
+      <div class="col-md-2">
+        <select name="category" class="form-select">
+          <option value="">Uncategorized</option>
+          {% for c in categories %}<option value="{{ c['id'] }}">{{ c['name'] }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="col-md-1 form-check">
+        <input class="form-check-input" name="featured" type="checkbox" id="featAdd">
+        <label class="form-check-label" for="featAdd">Feat</label>
+      </div>
+    </div>
+    <div class="mt-2"><button class="btn btn-primary">Add Design</button></div>
+  </form>
+</div>
+
+<table class="table table-sm">
+  <thead><tr><th>Preview</th><th>Title</th><th>Category</th><th>Featured</th><th>Action</th></tr></thead>
+  <tbody>
+    {% for d in designs %}
+      <tr>
+        <td style="width:100px;"><img src="{{ d['image_url'] }}" style="max-width:100px; height:auto;"></td>
+        <td>{{ d['title'] }}</td>
+        <td>{{ d['category_name'] or '—' }}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-secondary toggle-featured" data-id="{{ d['id'] }}">
+            {% if d['featured'] %}Yes{% else %}No{% endif %}
+          </button>
+        </td>
+        <td>
+          <form method="post" action="{{ url_for('admin_design_delete', design_id=d['id']) }}" style="display:inline;" onsubmit="return confirm('Delete design?');">
+            <button class="btn btn-sm btn-danger">Delete</button>
+          </form>
+          <!-- Inline edit modal trigger -->
+          <button class="btn btn-sm btn-secondary" data-bs-toggle="collapse" data-bs-target="#edit{{ d['id'] }}">Edit</button>
+          <div class="collapse mt-2" id="edit{{ d['id'] }}">
+            <form method="post" action="{{ url_for('admin_design_edit', design_id=d['id']) }}">
+              <div class="row g-2">
+                <div class="col-md-4"><input name="title" value="{{ d['title'] }}" class="form-control"></div>
+                <div class="col-md-5"><input name="image_url" value="{{ d['image_url'] }}" class="form-control"></div>
+                <div class="col-md-2">
+                  <select name="category" class="form-select">
+                    <option value="">Uncategorized</option>
+                    {% for c in categories %}<option value="{{ c['id'] }}" {% if d['category_id']==c['id'] %}selected{% endif %}>{{ c['name'] }}</option>{% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-1 form-check">
+                  <input class="form-check-input" name="featured" type="checkbox" {% if d['featured'] %}checked{% endif %}>
+                </div>
+              </div>
+              <div class="mt-2"><button class="btn btn-sm btn-primary">Save</button></div>
+            </form>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
